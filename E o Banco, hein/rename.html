@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var saldo = 100;
+    var senha = 3589;
+    var Nome = prompt("Digite seu nome:");
+    alert("Olá " + Nome + " é um prazer ter você por aqui!");
+
+    function menu()
+    {
+        var escolha = parseInt(prompt("O que posso fazer por você hoje ?, Digite 1)Saldo, 2) Extrato, 3)Saque, 4)Depósito, 5)Tranferência, 6)Sair"));
+
+        switch(escolha)
+        {
+            case 1: 
+                verSaldo();
+                break;
+            case 2:
+                verExtrato();
+                break;
+            case 3:
+                fazerSaque();
+                break;
+            case 4: 
+                fazerDeposito();
+                break;
+            case 5:
+                fazerTransferencia();
+                break;
+            case 6:
+                sair();
+                break;
+            default:
+                alert("Essa opção não existe!"); 
+        }
+    }
+    function verSaldo()
+    {
+        var senhaSaldo = parseInt(prompt("Digite sua senha:"));
+        if(senhaSaldo == senha)
+        {
+        alert("Seu saldo atual é:" + saldo);
+        menu();
+        }
+        else
+        {
+            alert("Senha incorreta, tente novamente");
+            verSaldo();
+        }
+    }
+    function verExtrato()
+    {
+        var senhaExtrato = parseInt(prompt("Digite sua senha:"));
+        if(senhaExtrato == senha)
+        {
+        var extrato = [ "Carrefour: 200.00 ", "Oxxo: 15.00 ", "Loja NBA: 109.90"];
+        alert(extrato);
+        menu();
+        }
+        else
+        {
+            alert("Senha incorreta, tente novamente");
+            verExtrato();
+        }
+    }
+    function fazerSaque()
+    {
+        var senhaSaque = parseInt(prompt("Digite sua senha:"));
+        if(senhaSaque == senha)
+        {
+            var saque = parseInt(prompt("Digite quanto o senhor(a) deseja retirar ?:"));
+
+            if(saque > saldo || saque == 0)
+            {
+                alert("Operação não autorizada");
+                fazerSaque();
+            }
+            else if(isNaN (saque) || saque == '')
+            {
+                alert("Por favor, informe um número verdadeiro.");
+                fazer_saque();
+            }
+            else
+            {
+                saldo = saldo - saque;
+                verSaldo();
+                menu();
+            }
+        }
+        else
+        {
+            alert("Senha incorreta, tente novamente");
+            fazerSaque();
+        }
+
+
+        
+    }
+    function fazerDeposito()
+    {
+        var senhaDeposito = parseInt(prompt("Digite sua senha:"));
+
+        if(senhaDeposito == senha)
+        {
+            var deposito = parseInt(prompt("Digite o valor do depósito que o senhor(a) deseja realizar"));
+
+            if(deposito == 0 || deposito < 0 || deposito == "")
+            {
+                alert("Operação não autorizada");
+                fazerDepósito();
+            }
+            else
+            {
+                saldo = saldo + deposito;
+                verSaldo();
+                menu();
+            }
+        }
+        else
+        {
+            alert("Senha incorreta, tente novamente");
+            fazerDeposito();
+        } 
+    }
+    function fazerTransferencia()
+    {
+        var senhaDeposito = parseInt(prompt("Digite sua senha:"));
+        if(senhaDeposito == senha)
+        {
+            var numeroConta = parseInt(prompt("Digite o número da conta que o senhor(a) deseja realizar a transferência"));
+
+            if(numeroConta == "" || isNaN(numeroConta))
+            {
+                alert("Essa conta não existe, por favor digite um número de conta valida!");
+                fazerTransferencia();
+            }
+            else
+            {
+                var transferencia = parseInt(prompt("Qual o valor que você deseja transferir para essa conta?"));
+
+                if(transferencia <= 0 || isNaN(transferencia) || transferencia < 0)
+                {
+                    alert("Essa opção não existe!"); 
+                }
+                else
+                {
+                    saldo = saldo - transferencia;
+                    verSaldo();
+                    menu();
+                }
+            }
+        }
+        else
+        {
+            alert("Senha incorreta, tente novamente");
+            fazerTransferencia();
+        }   
+    }
+    function sair()
+    {
+        var sair = confirm("Você deseja realmente sair do banco ?");
+        if(sair)
+        {
+            alert( Nome + ", agradecemos por escolher o nosso banco, foi um prazer ter você aqui.");
+            window.close();
+        }
+        else
+        {
+            menu();
+        }
+    }
+
+
+    menu();
+</script>
+<body>
+    
+</body>
+</html>
